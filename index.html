@@ -416,11 +416,11 @@ function go(s,c){
   const el=root;
   if(s===0) landing(el);
   else if(s===1) cats(el);
-  else if(s===2) list(el);
-  else if(s===3) patterns(el);
-  else if(s===4) beforeAfter(el);
-  else if(s===5) checklist(el);
-  else tips(el);
+  else if(s===2) tips(el);
+  else if(s===3) checklist(el);
+  else if(s===4) list(el);
+  else if(s===5) patterns(el);
+  else beforeAfter(el);
   window.scrollTo(0,0);
 }
 
@@ -434,11 +434,11 @@ function landing(el){
       <div class="land-sub">카테고리별 성공 사례의<br>커리큘럼을 살펴보세요</div>
       <div class="land-steps">
         <div class="land-step"><div class="land-step-num">1</div><div class="land-step-text">카테고리 선택</div></div>
-        <div class="land-step"><div class="land-step-num">2</div><div class="land-step-text">성공 레퍼런스 살펴보기</div></div>
-        <div class="land-step"><div class="land-step-num">3</div><div class="land-step-text">성공 커리큘럼의 구조 패턴</div></div>
-        <div class="land-step"><div class="land-step-num">4</div><div class="land-step-text">Before / After 비교</div></div>
-        <div class="land-step"><div class="land-step-num">5</div><div class="land-step-text">내 커리큘럼 자가 점검</div></div>
-        <div class="land-step"><div class="land-step-num">6</div><div class="land-step-text">작성 꿀팁</div></div>
+        <div class="land-step"><div class="land-step-num">2</div><div class="land-step-text">커리큘럼 작성 꿀팁</div></div>
+        <div class="land-step"><div class="land-step-num">3</div><div class="land-step-text">내 커리큘럼 자가 점검</div></div>
+        <div class="land-step"><div class="land-step-num">4</div><div class="land-step-text">성공 레퍼런스 살펴보기</div></div>
+        <div class="land-step"><div class="land-step-num">5</div><div class="land-step-text">성공 구조 패턴</div></div>
+        <div class="land-step"><div class="land-step-num">6</div><div class="land-step-text">Before / After 비교</div></div>
       </div>
     </div>
     <div class="land-bottom">
@@ -459,7 +459,7 @@ function cats(el){
     </div>
     <div class="cat-grid">
       ${CATS.map(c=>`
-        <div class="cat-card" onclick="go(2,'${c.id}')">
+        <div class="cat-card" onclick="go(2,'${c.id}')"><!-- tips -->
           <div class="cat-emoji">${c.emoji}</div>
           <div class="cat-name">${c.name}</div>
           <div class="cat-count">${c.n}개 레퍼런스</div>
@@ -473,9 +473,9 @@ function list(el) {
   const ms = M.filter(x=>x.c===cat);
   el.innerHTML = `
   <div class="scr on content">
-    <button class="back" onclick="go(1)">← 주제 선택</button>
+    <button class="back" onclick="go(3)">← 자가 점검</button>
     <div class="hdr">
-      <div class="hdr-label">${c.emoji} ${c.name}</div>
+      <div class="hdr-label">STEP 4 · ${c.emoji} ${c.name}</div>
       <div class="hdr-title">이런 모임들이<br>모객에 성공했어요</div>
       <div class="hdr-sub">커리큘럼을 펼쳐서 구조를 살펴보세요</div>
     </div>
@@ -519,7 +519,7 @@ function list(el) {
           }).join('')}
         </div>
       </div>`}).join('')}
-    <button class="btn-next" onclick="go(3)">성공 커리큘럼의 구조 패턴 →</button>
+    <button class="btn-next" onclick="go(5)">성공 구조 패턴 →</button>
   </div>`;
 }
 
@@ -602,9 +602,9 @@ function patterns(el) {
   const cc = CATS.find(x=>x.id===cat);
   el.innerHTML = `
   <div class="scr on content">
-    <button class="back" onclick="go(2)">← 레퍼런스 목록</button>
+    <button class="back" onclick="go(4)">← 레퍼런스 목록</button>
     <div class="hdr">
-      <div class="hdr-label">STEP 3</div>
+      <div class="hdr-label">STEP 5</div>
       <div class="hdr-title">성공 커리큘럼의<br>구조 패턴</div>
       <div class="hdr-sub">모객에 성공한 모임들의 공통 구조를 분석했어요</div>
     </div>
@@ -670,7 +670,7 @@ function patterns(el) {
       </div>
     </div>
 
-    <button class="btn-next" onclick="go(4)">Before / After 비교 →</button>
+    <button class="btn-next" onclick="go(6)">Before / After 비교 →</button>
     <button class="btn-next" onclick="go(1)" style="background:var(--white);color:var(--black);border:1.5px solid var(--g300);margin-top:10px;">다른 카테고리 보기</button>
   </div>`;
 }
@@ -679,9 +679,9 @@ function patterns(el) {
 function beforeAfter(el) {
   el.innerHTML = `
   <div class="scr on content">
-    <button class="back" onclick="go(3)">← 구조 패턴</button>
+    <button class="back" onclick="go(5)">← 구조 패턴</button>
     <div class="hdr">
-      <div class="hdr-label">STEP 4</div>
+      <div class="hdr-label">STEP 6</div>
       <div class="hdr-title">Before / After<br>커리큘럼 비교</div>
       <div class="hdr-sub">같은 주제라도 구조에 따라 매력이 달라져요</div>
     </div>
@@ -725,7 +725,6 @@ function beforeAfter(el) {
     </div>
     <div class="ba-point">💡 <strong>회차 제목이 "궁금하게" 만들어야 합니다. 제목만 봐도 가고 싶은 모임.</strong></div>
 
-    <button class="btn-next" onclick="go(5)">내 커리큘럼 자가 점검 →</button>
     <button class="btn-next" onclick="go(1)" style="background:var(--white);color:var(--black);border:1.5px solid var(--g300);margin-top:10px;">다른 카테고리 보기</button>
   </div>`;
 }
@@ -747,9 +746,9 @@ function checklist(el) {
 
   el.innerHTML = `
   <div class="scr on content">
-    <button class="back" onclick="go(4)">← Before/After</button>
+    <button class="back" onclick="go(2)">← 작성 꿀팁</button>
     <div class="hdr">
-      <div class="hdr-label">STEP 5</div>
+      <div class="hdr-label">STEP 3</div>
       <div class="hdr-title">내 커리큘럼<br>자가 점검</div>
       <div class="hdr-sub">작성한 커리큘럼을 하나씩 체크해보세요</div>
     </div>
@@ -764,7 +763,7 @@ function checklist(el) {
       <div class="ck-score-num" id="ckNum">0 / ${items.length}</div>
       <div class="ck-score-label" id="ckLabel">체크항목을 눌러보세요</div>
     </div>
-    <button class="btn-next" onclick="go(6)">커리큘럼 작성 꿀팁 →</button>
+    <button class="btn-next" onclick="go(4)">성공 레퍼런스 살펴보기 →</button>
     <button class="btn-next" onclick="go(1)" style="background:var(--white);color:var(--black);border:1.5px solid var(--g300);margin-top:10px;">다른 카테고리 보기</button>
   </div>`;
 }
@@ -782,13 +781,13 @@ function toggleCk(i) {
   document.getElementById('ckNum').style.color = colors[li];
 }
 
-// ========== TIPS (STEP 6) ==========
+// ========== TIPS (STEP 2) ==========
 function tips(el) {
   el.innerHTML = `
   <div class="scr on content">
-    <button class="back" onclick="go(5)">← 자가 점검</button>
+    <button class="back" onclick="go(1)">← 카테고리 선택</button>
     <div class="hdr">
-      <div class="hdr-label">STEP 6</div>
+      <div class="hdr-label">STEP 2</div>
       <div class="hdr-title">커리큘럼 작성 꿀팁</div>
       <div class="hdr-sub">모객에 가장 큰 영향을 주는 핵심 포인트</div>
     </div>
@@ -878,6 +877,7 @@ function tips(el) {
       </div>
 
     </div>
+    <button class="btn-next" onclick="go(3)">내 커리큘럼 자가 점검 →</button>
     <button class="btn-next" onclick="go(1)" style="background:var(--white);color:var(--black);border:1.5px solid var(--g300);margin-top:10px;">다른 카테고리 보기</button>
   </div>`;
 }
